@@ -1,6 +1,6 @@
 Feature:SmartBear order process
 
-@wip
+
   Scenario: Test  functionalities of SmartBear website
     Given User is logged into SmartBear Tester account and on Order page
     When User fills out the form as followed:

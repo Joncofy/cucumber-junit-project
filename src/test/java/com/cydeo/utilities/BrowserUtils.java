@@ -4,7 +4,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BrowserUtils {
@@ -29,14 +33,7 @@ public class BrowserUtils {
             System.out.println("Exception happened in sleep method!");
         }
     }
-    //Method info:
-    //• Name: verifyTitle()
-    //• Return type: void
-    //• Arg1: WebDriver
-    //• Arg2: String expectedTitle
-    public static void verifyTitle(){
 
-    }
     public static void waitUntilNotVisible(WebElement element, int seconds){
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),seconds);
         wait.until(ExpectedConditions.invisibilityOf(element));
@@ -49,6 +46,20 @@ public class BrowserUtils {
     public static void waitUntilClickable(WebElement element, int seconds) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), seconds);
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static List<String> dropdownOptionsAsString (WebElement dropdownElement){
+
+        Select select = new Select(dropdownElement);
+
+        List<WebElement> actualOptionsAsElement = select.getOptions();
+
+        List<String> actualOptionsAsString = new ArrayList<>();
+
+        for (WebElement each :actualOptionsAsElement){
+            actualOptionsAsString.add(each.getText());
+        }
+        return actualOptionsAsString;
     }
 
 
