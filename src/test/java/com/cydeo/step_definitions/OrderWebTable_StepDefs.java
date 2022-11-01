@@ -9,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 public class OrderWebTable_StepDefs {
@@ -28,6 +29,7 @@ public class OrderWebTable_StepDefs {
     }
     @When("user enters quantity {int}")
     public void user_enters_quantity(Integer int1) {
+        orderWebTablePage.quantityOWT.sendKeys(Keys.BACK_SPACE);
         orderWebTablePage.quantityOWT.sendKeys(""+int1);
 
     }
