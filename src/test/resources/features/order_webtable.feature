@@ -18,7 +18,7 @@ Feature: Web table user order feature
     Then user should see "Sherlock Holmes" in first row of the web table
 
 
-  @webtableApp
+
   Scenario Outline: User should be able to place order and order seen in web table
     When user selects product type "<productType>"
     And user enters quantity "<quantity>"
@@ -33,7 +33,7 @@ Feature: Web table user order feature
     And user enters process order button
     Then user should see "<customerName>" in first row of the web table
 
-@kek
+
     Examples: Valerchiki
       | productType | quantity | customerName    | street             | city   | state   | zipcode | cardType         | cardNumber       | expDate |
       | Familybea   | 2        | Sherlock Holmes | 221B Baker Street  | London | England | 50505   | american express | 1111222233334444 | 12/23   |
@@ -41,7 +41,7 @@ Feature: Web table user order feature
       | Screenable  | 3        | Don Don         | 331B Soup Street   | Warsaw | Poland  | 50707   | MasterCard       | 1111222233336666 | 11/12   |
 
 
-@lol
+
     Examples: Valerchiki
       | productType | quantity | customerName | street             | city   | state   | zipcode | cardType         | cardNumber       | expDate |
       | Familybea   | 2        | Sher Hol     | 221B Baker Street  | London | England | 50505   | american express | 1111222233334444 | 12/23   |

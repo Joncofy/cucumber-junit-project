@@ -21,14 +21,14 @@ public class Driver {
      */
 
 
-    private static WebDriver driver;
+    private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 /*
     Create re-usable utility method which will return same driver instance when we call it.
      */
 
     public static WebDriver getDriver() {
 
-        if (driver == null) { // if driver/browser was never opened
+        if (driverPool.get() == null) { // if driver/browser was never opened
 
             String browserType = ConfigReader.getProperty("browser");
              /*
@@ -46,26 +46,26 @@ public class Driver {
 
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver= new ChromeDriver();
+                    driverPool.set(new ChromeDriver());
 //                            (new ChromeOptions().setHeadless(true));
-                    driver.manage().window().maximize();
-                    driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+                    driverPool.get().manage().window().maximize();
+                    driverPool.get().manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    driver.manage().window().maximize();
-                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    driverPool.set(new FirefoxDriver());
+                    driverPool.get().manage().window().maximize();
+                    driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     break;
             }
         }
-            return driver;  // Same driver instance will be returned every time we call Driver.getDriver() method
+            return driverPool.get();  // Same driver instance will be returned every time we call Driver.getDriver() method
 
     }
     public static void closeDriver(){
-        if(driver != null){
-            driver.quit();// this line will kill the session. value will not be null
-            driver = null;
+        if(driverPool.get() != null){
+            driverPool.get().quit();// this line will kill the session. value will not be null
+            driverPool.remove();
         }
     }
 }
